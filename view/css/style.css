@@ -92,6 +92,72 @@ main button {
     border-radius: 20px;
     width: 85px;
     height: 30px;
-    box-shadow: 0px 3px 6px 0px rgba(57, 57, 57, 0.503);
+    box-shadow: 0px 2px 4px 0px rgba(57, 57, 57, 0.503);
     margin: 15px;
+}
+
+.message_forum {
+    width: 500px;
+    padding: 10px;
+    background-color: rgba(216, 216, 216, 0.421);
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px 0px rgba(57, 57, 57, 0.503);
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.photo_profil {
+    width: 40px;
+}
+
+.flex div {
+    display: flex;
+    align-items: center;
+}
+
+.flex img {
+    border-radius: 40px;
+}
+
+.flex div h3 {
+    margin-left: 20px;
+}
+
+.rond {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 0 5px 0 5px;
+    justify-content: center;
+}
+
+.rond div {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+}
+
+.rond .html {
+    background: linear-gradient(#E65127, #F2672E);
+}
+
+.rond .css {
+    background: linear-gradient(#30AADD, #0C73B8);
+}
+
+.rond .js {
+    background: linear-gradient(#E7A328, #F2BF26);
+}
+
+.texte {
+    text-align: left;
+    margin: 10px 0 10px 15px;
+}
+
+.texte h2 {
+    margin-bottom: 5px;
 }
