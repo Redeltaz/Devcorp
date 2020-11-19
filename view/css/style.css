@@ -96,12 +96,21 @@ main button {
     margin: 15px;
 }
 
+.all_message {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
 .message_forum {
     width: 500px;
     padding: 10px;
     background-color: rgba(216, 216, 216, 0.421);
     border-radius: 10px;
     box-shadow: 0px 3px 6px 0px rgba(57, 57, 57, 0.503);
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .flex {
@@ -160,4 +169,12 @@ main button {
 
 .texte h2 {
     margin-bottom: 5px;
+}
+
+.espace p:first-child {
+    margin-right: 15px;
+}
+
+.bas {
+    margin: 0 20px;
 }
