@@ -14,7 +14,8 @@ Rendu du projet Devlab de l'année
    git clone https://github.com/Redeltaz/Devcorp
 ```
 
-**Then start the project**
-```symfony server:start```
+**Then start the project**<br>
+```symfony server:start
+```
 
 Be sure to have composer and symfony already install
