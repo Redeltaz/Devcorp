@@ -10,12 +10,14 @@ Rendu du projet Devlab de l'année
 *Lucas Campistron*<br>
 
 **To see the project :**
-```git init
-   git clone https://github.com/Redeltaz/Devcorp
+```
+git init
+git clone https://github.com/Redeltaz/Devcorp
 ```
 
 **Then start the project**<br>
-```symfony server:start
+```
+symfony server:start
 ```
 
 Be sure to have composer and symfony already install
