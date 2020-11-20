@@ -11,7 +11,8 @@ Rendu du projet Devlab de l'année
 
 **To see the project :**
 ```git init
-    git clone https://github.com/Redeltaz/Devcorp```
+   git clone https://github.com/Redeltaz/Devcorp
+```
 
 **Then start the project**
 ```symfony server:start```
