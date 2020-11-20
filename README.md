@@ -1,8 +1,8 @@
-#Projet Dev'Corp
+# Projet Dev'Corp
 
 Rendu du projet Devlab de l'année 
 
-##Equipe :<br>
+## Equipe :<br>
 *Théo Laberrondo*<br>
 *Lucas Orsini*<br>
 *Pierre-Antoine Baizeau*<br>
