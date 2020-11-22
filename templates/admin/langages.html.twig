@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<a href="{{ path('admin_langage_create') }}">Créer un langage</a><br>
+    {% for elem in langages %}
+        <a href="{{ path('admin_langage_modif', { id:elem.id }) }}">Modifier</a>
+        {{ elem.langage }}<br>
+    {% endfor %}
+{% endblock %}
