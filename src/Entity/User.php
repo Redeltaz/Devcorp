@@ -2,59 +2,62 @@
 
 namespace App\Entity;
 
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
- *
- * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
 class User
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pseudo", type="string", length=16, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=500, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=18, nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="picture", type="string", length=535, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="grade", type="integer", nullable=false)
+     * @ORM\Column(type="integer")
      */
     private $grade;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $creationDate;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Poste::class, mappedBy="user")
+     */
+    private $postes;
+
+    public function __construct()
+    {
+        $this->postes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,7 +105,7 @@ class User
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
 
@@ -121,5 +124,45 @@ class User
         return $this;
     }
 
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creationDate;
+    }
 
+    public function setCreationDate(\DateTimeInterface $creationDate): self
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Poste[]
+     */
+    public function getPostes(): Collection
+    {
+        return $this->postes;
+    }
+
+    public function addPoste(Poste $poste): self
+    {
+        if (!$this->postes->contains($poste)) {
+            $this->postes[] = $poste;
+            $poste->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePoste(Poste $poste): self
+    {
+        if ($this->postes->removeElement($poste)) {
+            // set the owning side to null (unless already changed)
+            if ($poste->getUser() === $this) {
+                $poste->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

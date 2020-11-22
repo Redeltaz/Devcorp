@@ -39,6 +39,12 @@ class Poste
      */
     private $langages;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="postes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->langages = new ArrayCollection();
@@ -108,6 +114,18 @@ class Poste
         if ($this->langages->removeElement($langage)) {
             $langage->removePoste($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

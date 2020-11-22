@@ -11,5 +11,8 @@
     <h1>Voici le poste</h1>
     <h2>{{ poste.title }}</h2>
     <p>{{ poste.content }}</p>
+    {% for langages in poste.langages %}
+            <p>{{ langages.langage }}</p>
+    {% endfor %}
     <a href="{{ path("forum_home")}}">Retourner à l'accueil</a>
 {% endblock %}
