@@ -10,6 +10,7 @@ use App\Entity\Poste;
 use App\Entity\PosteLangage;
 use App\Form\PosteType;
 use App\Repository\PosteRepository;
+use Doctrine\Inflector\Language;
 
 class ForumController extends AbstractController
 {
@@ -29,7 +30,7 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum/create", name="forum_create", methods={"GET", "POST"})
      */
-    public function create(Request $request, Poste $poste = null): Response
+    public function create(Request $request, Poste $poste = null, PosteLangage $langage = null): Response
     {
         if($poste == null)
         {
@@ -48,7 +49,9 @@ class ForumController extends AbstractController
             $manager->persist($poste);
             $manager->flush();
 
-            return $this->redirectToRoute('forum_home');
+            return $this->redirectToRoute('forum_show', [
+                'id' => $poste->getId()
+            ]);
         }
 
         return $this->render('forum/create.html.twig', [
@@ -59,10 +62,16 @@ class ForumController extends AbstractController
     /**
      * @Route("forum/show/{id<[0-9]+>}", name="forum_show", methods={"GET", "POST"})
      */
-    public function show()
+    public function show(PosteRepository $repo, int $id)
     {
-        return $this->render('forum/index.html.twig', [
-            'controller_name' => 'ForumController',
+        $poste = $repo->find($id);
+
+        if(! $poste){
+            throw $this->createNotFoundException('Le poste #'.$poste. ' n\'existe pas !');
+        }
+
+        return $this->render('forum/show.html.twig', [
+            'poste' => $poste
         ]);
     }
 }
