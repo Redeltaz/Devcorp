@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Poste;
 use App\Entity\PosteLangage;
 use App\Form\PosteType;
+use App\Repository\PosteLangageRepository;
 use App\Repository\PosteRepository;
 
 class ForumController extends AbstractController
@@ -16,14 +17,39 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum", name="forum_home")
      */
-    public function index(PosteRepository $repo): Response
+    public function index(Request $request, PosteRepository $repo, PosteLangageRepository $repoLang): Response
     {
+        $allLangages = $repoLang->findAll();
+
+        $langage = $request->query->get('langage');
 
         $postes = $repo->findAll();
 
+        if($langage === null)
+        {
+            return $this->render('forum/index.html.twig', [
+                'postes' => $postes,
+                'langages' => $allLangages,
+            ]);
+        }
+
+        $specificPoste = [];
+
+        foreach($postes as $posteRender)
+        {
+            foreach($posteRender->getLangages() as $langagePoste){
+                if($langagePoste->getLangage() === $langage){
+                    array_push($specificPoste, $posteRender);
+                }
+            }
+        }
+
         return $this->render('forum/index.html.twig', [
-            'postes' => $postes,
+            'postes' => $specificPoste,
+            'langages' => $allLangages,
         ]);
+
+
     }
 
     /**
@@ -49,6 +75,7 @@ class ForumController extends AbstractController
                 $manager->persist($langage);
             }
             $poste->setDate(new \DateTime());
+            $poste->setUser($this->getUser());
             $manager->persist($poste);
             $manager->flush();
 
@@ -77,3 +104,4 @@ class ForumController extends AbstractController
         ]);
     }
 }
+

@@ -9,7 +9,11 @@
 
 {% block body %}
     <h1 class="title">Bienvenue sur le forum</h1>
-    <a href="{{ path("forum_create") }}">Créer un poste</a>
+    <a href="{{ path("forum_create") }}">Créer un poste</a><br>
+
+    {% for langageChoice in langages %}
+        <a href="{{ path('forum_home', {'langage': langageChoice.langage}) }}">{{ langageChoice.langage }}</a>
+    {% endfor %}
 
     {% for elem in postes %}
         <h1>{{ elem.title }}</h1>
@@ -17,5 +21,7 @@
         {% for langages in elem.langages %}
             <p>{{ langages.langage }}</p>
         {% endfor %}
+    {% else %}
+    <p>Aucun poste n'existe</p>
     {% endfor %}
 {% endblock %}
