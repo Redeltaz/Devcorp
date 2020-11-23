@@ -1,0 +1,284 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Prompt';
+
+}
+
+nav{
+    background-color: #F5AE20;
+    display: flex;
+}
+
+
+nav>img{
+    display: flex;
+    justify-content: center;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+#navbar-content{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+
+#navbar-content>a{
+    align-self: center;
+    color: white;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+#search-bar{
+    align-self: center;
+    padding: 15px;
+    min-width: 30%;
+    border: none;
+    border-radius: 30px;
+    font-size: 22px;
+}
+
+#search-bar:focus,
+#code-input:focus,
+select{
+    outline: none;
+}
+
+
+:placeholder-shown{
+    font-size: 22px;
+}
+
+#header-content{
+    text-align: center;
+    background-color: rgba(53, 176, 233, 0.815);
+}
+
+#header-content>h1{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+#header-content>h1
+{
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.container-border {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.button {
+    display :flex;
+    padding-top: 3%;
+    padding-left: 8%;
+    justify-content: left;
+}
+.container {
+    border: 1px solid grey;
+    width: 80%;
+    padding-right:2%;
+    padding-left: 2%;
+    display :flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container {
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+.card-cours img {
+    height: 160px;
+    width: 200px;
+}
+.card-cours {
+    background-color:#FFF1BB;
+    padding: 10px;
+}
+
+section {
+    padding-bottom: 2%;
+}
+
+
+footer{
+    display: flex;
+    margin-top: 100px;
+    background-color: orange;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+
+
+}
+
+#footer-content{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+select{
+    width: 200px;
+    background-color: orange;
+    color: white;
+    font-size: 20px;
+    padding-left: 10px;
+    border-radius: 50px;
+    border: 0.5px solid white;
+}
+
+
+#footer-links{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+
+#footer-links>p{
+    color: white;
+    font-weight: 500;
+    font-size: 25px;
+    text-transform: uppercase;
+    
+}
+
+#logo-ilv{
+    height: 50px;
+}
+
+#devcorp{
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+
+#devcorp>p{
+    color: white;
+    font-size: 25px;
+    text-transform: uppercase;
+    margin-left:20px;
+}
+
+#footer-link{
+    display: flex;
+}
+
+#social-logos>img{
+    height: 30px;
+}
+
+#social-content{
+    color:white;
+    margin-right: 20px;
+}
+.button button {
+    background-color: #F5AE20;
+    padding-right: 12px;
+}
+
+.button1 {  
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+}
+
+.buttonCenter {
+    border: 1px solid black;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+}
+
+.button5 {
+    border: 1px solid black;
+    border-bottom: none;
+    border-left: none;
+}
+
+.card-cours button {
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #F5AE20;
+}
+
+
+@media screen and (max-width: 1024px){
+    nav{
+        display: block;
+        flex-flow: column wrap;
+    }
+
+    nav>img{
+        margin: auto;
+        padding-top: 10px;
+    }
+
+    #navbar-content{
+        flex-flow: column wrap;
+
+    }
+
+    #navbar-content>*{
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+    }
+    footer{
+        flex-direction: column;
+    }
+
+    #footer-content{
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+
+    #footer-content>*,
+    #social>*{
+        margin-top: 20px;
+    }
+
+    #devcorp{
+        margin-left: 0px;
+        justify-content: center;
+    }
+
+    #footer-links{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #footer-links>p{
+        display: flex;
+        font-size: 15px;
+        padding: 10px;
+        justify-content: space-between;
+    }
+
+    #social-content{
+        text-align: center;
+        margin: 0;
+    }
+    .container {
+        flex-flow: column wrap;
+        justify-content: space-between;
+        height: 1000px;
+    }
+
+}
