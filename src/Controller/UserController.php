@@ -44,6 +44,7 @@ class UserController extends AbstractController
             $user->setPassword($hash);
             $user->setCreationDate(new \DateTime());
             $user->setPicture("new");
+            $user->setGrade(1);
             $manager->persist($user);
             $manager->flush();
 
