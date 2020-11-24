@@ -4,6 +4,9 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href=" {{ asset("css/navbar.css") }}">
+        <link rel="stylesheet" href=" {{ asset("css/AccueilForum.css") }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -16,7 +19,7 @@
             <div id="navbar-content">
                 <a href=" {{ path("home") }}"><p>Accueil</p></a>
                 <a href=" {{ path("forum_home") }}"><p>Forum</p></a>
-                <a><p>Cours</p></a>
+                <a href=" {{ path("accueil_forum") }}"><p>Cours</p></a>
                 <a><p>Equipe</p></a>
                 <input type="text" id="search-bar" name="search-bar" placeholder="RECHERCHER">
                 <a href=" {{ path("connexion") }}"><p>Connexion</p></a>

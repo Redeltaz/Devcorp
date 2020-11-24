@@ -1,0 +1,180 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Prompt';
+
+}
+
+/* navbarre */
+
+nav{
+    background-color: #F5AE20;
+    display: flex;
+}
+
+
+nav>img{
+    display: flex;
+    justify-content: center;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+#navbar-content{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+
+#navbar-content>a{
+    align-self: center;
+    color: white;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+#search-bar{
+    align-self: center;
+    padding: 15px;
+    min-width: 30%;
+    border: none;
+    border-radius: 30px;
+    font-size: 22px;
+}
+
+#search-bar:focus,
+#code-input:focus{
+    outline: none;
+}
+
+
+:placeholder-shown{
+    font-size: 22px;
+}
+
+
+/* main */
+
+main {
+    text-align: center;
+}
+
+main h1 {
+    font-size: 35px;
+    margin: 20px;
+}
+
+main #search-bar{
+    border: 1.5px black solid;
+}
+
+main button:first-child {
+    background: linear-gradient(#E65127, #F2672E);
+}
+
+main button:nth-child(2){
+    background: linear-gradient(#30AADD, #0C73B8);
+}
+
+main button:nth-child(3){
+    background: linear-gradient(#E7A328, #F2BF26);
+}
+
+main button:nth-child(4){
+    background: linear-gradient(#9BE627, #B1F22E);
+}
+
+main button {
+    border: none;
+    border-radius: 20px;
+    width: 85px;
+    height: 30px;
+    box-shadow: 0px 2px 4px 0px rgba(57, 57, 57, 0.503);
+    margin: 15px;
+}
+
+.all_message {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+
+.message_forum {
+    width: 500px;
+    padding: 10px;
+    background-color: rgba(216, 216, 216, 0.421);
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px 0px rgba(57, 57, 57, 0.503);
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.photo_profil {
+    width: 40px;
+}
+
+.flex div {
+    display: flex;
+    align-items: center;
+}
+
+.flex img {
+    border-radius: 40px;
+}
+
+.flex div h3 {
+    margin-left: 20px;
+}
+
+.rond {
+    width: 15px;
+    height: 15px;
+    border: 1px solid black;
+    border-radius: 15px;
+    margin: 0 5px 0 5px;
+    justify-content: center;
+}
+
+.rond div {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+}
+
+.rond .html {
+    background: linear-gradient(#E65127, #F2672E);
+}
+
+.rond .css {
+    background: linear-gradient(#30AADD, #0C73B8);
+}
+
+.rond .js {
+    background: linear-gradient(#E7A328, #F2BF26);
+}
+
+.texte {
+    text-align: left;
+    margin: 10px 0 10px 15px;
+}
+
+.texte h2 {
+    margin-bottom: 5px;
+}
+
+.espace p:first-child {
+    margin-right: 15px;
+}
+
+.bas {
+    margin: 0 20px;
+}
