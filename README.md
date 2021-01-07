@@ -11,7 +11,6 @@ Rendu du projet Devlab de l'année
 
 **To see the project :**
 ```
-git init
 git clone https://github.com/Redeltaz/Devcorp
 ```
 
