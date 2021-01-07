@@ -61,9 +61,15 @@ class User implements UserInterface
      */
     private $postes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="user")
+     */
+    private $answers;
+
     public function __construct()
     {
         $this->postes = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -187,5 +193,35 @@ class User implements UserInterface
 
     public function getRoles() {
         return ['ROLE_USER'];
+    }
+
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getUser() === $this) {
+                $answer->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

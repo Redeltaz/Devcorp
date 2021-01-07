@@ -11,17 +11,30 @@
     <h1 class="title">Bienvenue sur le forum</h1>
     <a href="{{ path("forum_create") }}">Créer un poste</a><br>
 
+    <div class="choice">
     {% for langageChoice in langages %}
         <a href="{{ path('forum_home', {'langage': langageChoice.langage}) }}">{{ langageChoice.langage }}</a>
     {% endfor %}
+    <a href="{{ path('forum_home') }}">-All Langages-</a>
+    </div>
 
-    {% for elem in postes %}
-        <h1>{{ elem.title }}</h1>
-        <p>{{ elem.content }}</p>
-        {% for langages in elem.langages %}
-            <p>{{ langages.langage }}</p>
+    <div class="container">
+        {% for elem in postes %}
+        <hr>
+        <div class="content">
+            <a href="{{ path('forum_show', { id:elem.id }) }}" class="show">
+                <h1 class="posteTitle">{{ elem.title }}</h1>
+                <p class="posteUser" class="posteUser">{{ elem.user }}</p>
+                <p class="posteContent">{{ elem.content }}</p>
+                <div class="posteLangages">
+                {% for langages in elem.langages %}
+                    <p>{{ langages.langage }}</p>
+                {% endfor %}
+                </div>
+            </a>
+        </div>
+        {% else %}
+        <p>Aucun poste n'existe</p>
         {% endfor %}
-    {% else %}
-    <p>Aucun poste n'existe</p>
-    {% endfor %}
+    </div>
 {% endblock %}

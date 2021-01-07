@@ -8,11 +8,34 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Voici le poste</h1>
-    <h2>{{ poste.title }}</h2>
-    <p>{{ poste.content }}</p>
-    {% for langages in poste.langages %}
-            <p>{{ langages.langage }}</p>
-    {% endfor %}
-    <a href="{{ path("forum_home")}}">Retourner à l'accueil</a>
+    <div class="container">
+        <h1>Voici le poste</h1>
+        <h1>{{ poste.title }}</h1>
+        <p>{{ poste.content }}</p>
+        <div class="posteLangages">
+            {% for langages in poste.langages %}
+                    <p>{{ langages.langage }}</p>
+            {% endfor %}
+        </div><br>
+        {% if user is same as(poste.user) %}
+            <a href="{{ path('forum_update', { id:poste.id }) }}">Modifier</a><br>
+        {% endif %}
+        <a href="{{ path("forum_home")}}">Retourner à l'accueil</a>
+    </div>
+    <hr>
+    <div>
+    {% if user is same as(NULL) %}
+        <p><a href="{{ path('connexion') }}">Connectez vous</a> pour répondre</p>
+    {% else %}
+        {{ form(answerForm) }}
+    {% endif %}
+    </div>
+    <div class="answerContainer">
+        {% for answer in answers %}
+        <div class="answerContent">
+            <p>{{ answer.user.pseudo }}</p>
+            <p>{{ answer.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

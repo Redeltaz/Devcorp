@@ -45,9 +45,15 @@ class Poste
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="poste")
+     */
+    private $answers;
+
     public function __construct()
     {
         $this->langages = new ArrayCollection();
+        $this->answers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +132,36 @@ class Poste
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getPoste() === $this) {
+                $answer->setPoste(null);
+            }
+        }
 
         return $this;
     }

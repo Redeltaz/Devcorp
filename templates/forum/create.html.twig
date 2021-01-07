@@ -11,6 +11,10 @@
 {% block body %}
     <h1>Créer un poste</h1>
 
-    {{ form(form) }}
+    {% if user is same as(NULL) %}
+        <p><a href="{{ path('connexion') }}">Connectez vous</a> pour créer un poste</p>
+    {% else %}
+        {{ form(form) }}
+    {% endif %}
 
 {% endblock %}

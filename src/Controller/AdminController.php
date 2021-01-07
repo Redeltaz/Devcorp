@@ -20,7 +20,8 @@ class AdminController extends AbstractController
         $langages = $repo->findAll();
         
         return $this->render('admin/langages.html.twig', [
-            'langages' => $langages
+            'langages' => $langages,
+            'user' => $this->getUser()
         ]);
     }
 
@@ -48,7 +49,8 @@ class AdminController extends AbstractController
         }
         
         return $this->render('admin/langageForm.html.twig', [
-            'langageForm' => $form->createView()
+            'langageForm' => $form->createView(),
+            'user' => $this->getUser()
         ]);
     }
 }

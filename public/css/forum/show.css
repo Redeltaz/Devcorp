@@ -2,3 +2,13 @@
     margin: 0;
     padding: 0;
 }
+
+h1:first-child{
+    text-align: center;
+}
+
+.posteLangages{
+    margin-top: 10px;
+    background-color: rgb(216, 216, 216);
+    display: inline-block;
+}
