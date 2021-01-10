@@ -66,10 +66,22 @@ class User implements UserInterface
      */
     private $answers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PosteLike::class, mappedBy="user")
+     */
+    private $posteLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PosteDislike::class, mappedBy="user")
+     */
+    private $posteDislikes;
+
     public function __construct()
     {
         $this->postes = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->posteLikes = new ArrayCollection();
+        $this->posteDislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -219,6 +231,66 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($answer->getUser() === $this) {
                 $answer->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PosteLike[]
+     */
+    public function getPosteLikes(): Collection
+    {
+        return $this->posteLikes;
+    }
+
+    public function addPosteLike(PosteLike $posteLike): self
+    {
+        if (!$this->posteLikes->contains($posteLike)) {
+            $this->posteLikes[] = $posteLike;
+            $posteLike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosteLike(PosteLike $posteLike): self
+    {
+        if ($this->posteLikes->removeElement($posteLike)) {
+            // set the owning side to null (unless already changed)
+            if ($posteLike->getUser() === $this) {
+                $posteLike->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PosteDislike[]
+     */
+    public function getPosteDislikes(): Collection
+    {
+        return $this->posteDislikes;
+    }
+
+    public function addPosteDislike(PosteDislike $posteDislike): self
+    {
+        if (!$this->posteDislikes->contains($posteDislike)) {
+            $this->posteDislikes[] = $posteDislike;
+            $posteDislike->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosteDislike(PosteDislike $posteDislike): self
+    {
+        if ($this->posteDislikes->removeElement($posteDislike)) {
+            // set the owning side to null (unless already changed)
+            if ($posteDislike->getUser() === $this) {
+                $posteDislike->setUser(null);
             }
         }
 

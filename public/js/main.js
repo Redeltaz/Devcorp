@@ -13,7 +13,6 @@ window.addEventListener("resize", () => {
 })
 
 responsiveButton.addEventListener("click", () => {
-    console.log("ok")
     if (isShowed == false) {
         navContent.style.cssText = "display: flex; height : 75vh"
         nav.style.cssText = "height: 100vh; position: fixed; width:100%"

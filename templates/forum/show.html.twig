@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Créer un poste
+    {{ poste.title }}
 {% endblock %}
 {% block stylesheets %}
     <link href="{{ asset("css/forum/show.css") }}" rel="stylesheet">
@@ -17,6 +17,12 @@
                     <p>{{ langages.langage }}</p>
             {% endfor %}
         </div><br>
+        <div class="review">
+            <a class="like" href="{{ path('forum_poste_like', {'id': poste.id}) }}">like</a>
+            <p class="likeDisplay">{{ poste.posteLikes | length }}</p>
+            <a class="dislike" href="{{ path('forum_poste_dislike', {'id': poste.id}) }}">dislike</a>
+            <p class="dislikeDisplay">{{ poste.posteDislikes | length }}</p>
+        </div>
         {% if user is same as(poste.user) %}
             <a href="{{ path('forum_update', { id:poste.id }) }}">Modifier</a><br>
         {% endif %}
@@ -38,4 +44,6 @@
         </div>
         {% endfor %}
     </div>
+
+    <script src="{{ asset('js/forum/show.js') }}"></script>
 {% endblock %}

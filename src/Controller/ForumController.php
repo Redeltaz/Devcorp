@@ -8,12 +8,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Poste;
 use App\Entity\Answer;
+use App\Entity\PosteDislike;
 use App\Entity\PosteLangage;
+use App\Entity\PosteLike;
 use App\Form\AnswerType;
 use App\Form\PosteType;
 use App\Repository\PosteLangageRepository;
 use App\Repository\PosteRepository;
 use App\Repository\AnswerRepository;
+use App\Repository\PosteDislikeRepository;
+use App\Repository\PosteLikeRepository;
 
 class ForumController extends AbstractController
 {
@@ -142,6 +146,96 @@ class ForumController extends AbstractController
             'user' => $this->getUser(),
             'answerForm' => $form->createView()
         ]);
+    }
+
+    /**
+     *@Route("forum/show/{id}/like", name="forum_poste_like")
+     */
+    public function posteLike(Poste $poste, PosteLikeRepository $likeRepo)
+    {
+        $user = $this->getUser();
+        $manager = $this->getDoctrine()->getManager();
+
+        if(!$user){
+            return $this->json([
+                'code' => 403,
+                'message' => "Vous devez être connecté"
+            ], 403);
+        }
+
+        if($poste->isLiked($user)) {
+            $like = $likeRepo->findOneBy([
+                'poste' =>  $poste,
+                'user' => $user
+            ]);
+
+            $manager->remove($like);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Like supprimé',
+                'likes' => $likeRepo->count(['poste' => $poste])
+            ], 200);
+        }
+
+        $like = new PosteLike();
+        $like->setPoste($poste)
+             ->setUser($user);
+
+        $manager->persist($like);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Ajout like',
+            'likes' => $likeRepo->count(['poste' => $poste])
+        ], 200);
+    }
+
+    /**
+     *@Route("forum/show/{id}/dislike", name="forum_poste_dislike")
+     */
+    public function posteDislike(Poste $poste, PosteDislikeRepository $dislikeRepo)
+    {
+        $user = $this->getUser();
+        $manager = $this->getDoctrine()->getManager();
+
+        if(!$user){
+            return $this->json([
+                'code' => 403,
+                'message' => "Vous devez être connecté"
+            ], 403);
+        }
+
+        if($poste->isDisliked($user)) {
+            $dislike = $dislikeRepo->findOneBy([
+                'poste' =>  $poste,
+                'user' => $user
+            ]);
+
+            $manager->remove($dislike);
+            $manager->flush();
+
+            return $this->json([
+                'code' => 200,
+                'message' => 'Dislike supprimé',
+                'dislikes' => $dislikeRepo->count(['poste' => $poste])
+            ], 200);
+        }
+
+        $dislike = new PosteDislike();
+        $dislike->setPoste($poste)
+             ->setUser($user);
+
+        $manager->persist($dislike);
+        $manager->flush();
+
+        return $this->json([
+            'code' => 200,
+            'message' => 'Ajout dislike',
+            'dislikes' => $dislikeRepo->count(['poste' => $poste])
+        ], 200);
     }
 }
 

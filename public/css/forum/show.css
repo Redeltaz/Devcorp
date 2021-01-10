@@ -12,3 +12,11 @@ h1:first-child{
     background-color: rgb(216, 216, 216);
     display: inline-block;
 }
+
+.review{
+    display: flex;
+}
+
+.review p{
+    margin-right: 10px;
+}

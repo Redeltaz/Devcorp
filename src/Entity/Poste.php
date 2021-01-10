@@ -50,10 +50,22 @@ class Poste
      */
     private $answers;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PosteLike::class, mappedBy="poste")
+     */
+    private $posteLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PosteDislike::class, mappedBy="poste")
+     */
+    private $posteDislikes;
+
     public function __construct()
     {
         $this->langages = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->posteLikes = new ArrayCollection();
+        $this->posteDislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,5 +176,87 @@ class Poste
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|PosteLike[]
+     */
+    public function getPosteLikes(): Collection
+    {
+        return $this->posteLikes;
+    }
+
+    public function addPosteLike(PosteLike $posteLike): self
+    {
+        if (!$this->posteLikes->contains($posteLike)) {
+            $this->posteLikes[] = $posteLike;
+            $posteLike->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosteLike(PosteLike $posteLike): self
+    {
+        if ($this->posteLikes->removeElement($posteLike)) {
+            // set the owning side to null (unless already changed)
+            if ($posteLike->getPoste() === $this) {
+                $posteLike->setPoste(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PosteDislike[]
+     */
+    public function getPosteDislikes(): Collection
+    {
+        return $this->posteDislikes;
+    }
+
+    public function addPosteDislike(PosteDislike $posteDislike): self
+    {
+        if (!$this->posteDislikes->contains($posteDislike)) {
+            $this->posteDislikes[] = $posteDislike;
+            $posteDislike->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosteDislike(PosteDislike $posteDislike): self
+    {
+        if ($this->posteDislikes->removeElement($posteDislike)) {
+            // set the owning side to null (unless already changed)
+            if ($posteDislike->getPoste() === $this) {
+                $posteDislike->setPoste(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLiked(User $user): bool
+    {
+        foreach($this->posteLikes as $like){
+            if($like->getUser() === $user){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isDisliked(User $user): bool
+    {
+        foreach($this->posteDislikes as $dislike){
+            if($dislike->getUser() === $user){
+                return true;
+            }
+        }
+
+        return false;
     }
 }
