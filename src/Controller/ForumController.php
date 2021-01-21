@@ -30,10 +30,9 @@ class ForumController extends AbstractController
 
         $langage = $request->query->get('langage');
 
-        $postes = $repo->findAll();
+        $postes = $repo->findBy([], ['date' => 'DESC']);
 
-        if($langage === null)
-        {
+        if ($langage === null) {
             return $this->render('forum/index.html.twig', [
                 'postes' => $postes,
                 'langages' => $allLangages,
@@ -43,10 +42,9 @@ class ForumController extends AbstractController
 
         $specificPoste = [];
 
-        foreach($postes as $posteRender)
-        {
-            foreach($posteRender->getLangages() as $langagePoste){
-                if($langagePoste->getLangage() === $langage){
+        foreach ($postes as $posteRender) {
+            foreach ($posteRender->getLangages() as $langagePoste) {
+                if ($langagePoste->getLangage() === $langage) {
                     array_push($specificPoste, $posteRender);
                 }
             }
@@ -57,18 +55,14 @@ class ForumController extends AbstractController
             'langages' => $allLangages,
             'user' => $this->getUser()
         ]);
-
-
     }
 
     /**
      * @Route("/forum/create", name="forum_create", methods={"GET", "POST"})
-     * @Route("/forum/update/{id}", name="forum_update")
      */
     public function create(Request $request, Poste $poste = null): Response
     {
-        if($poste == null)
-        {
+        if ($poste == null) {
             $poste = new Poste;
         }
 
@@ -77,13 +71,7 @@ class ForumController extends AbstractController
         $form = $this->createForm(PosteType::class, $poste);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
-            foreach ($form->get('langages')->getData() as $langage) {
-                $poste->addLangage($langage);
-                $langage->addPoste($poste);
-                $manager->persist($langage);
-            }
+        if ($form->isSubmitted() && $form->isValid()) {
             $poste->setDate(new \DateTime());
             $poste->setUser($this->getUser());
             $manager->persist($poste);
@@ -99,7 +87,38 @@ class ForumController extends AbstractController
             'form' => $form->createView(),
             'user' => $this->getUser()
         ]);
-    } 
+    }
+
+    /**
+     * @Route("/forum/update/{id}", name="forum_update")
+     */
+    public function update(Request $request, Poste $poste = null): Response
+    {
+        if ($poste == null) {
+            $poste = new Poste;
+        }
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(PosteType::class, $poste);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            $manager->persist($poste);
+            $manager->flush();
+
+            return $this->redirectToRoute('forum_show', [
+                'id' => $poste->getId(),
+                'user' => $this->getUser()
+            ]);
+        }
+
+        return $this->render('forum/create.html.twig', [
+            'form' => $form->createView(),
+            'user' => $this->getUser()
+        ]);
+    }
 
     /**
      * @Route("forum/show/{id<[0-9]+>}", name="forum_show", methods={"GET", "POST"})
@@ -109,12 +128,11 @@ class ForumController extends AbstractController
         $poste = $posteRepo->find($id);
         $answers = $poste->getAnswers();
 
-        if(! $poste){
-            throw $this->createNotFoundException('Le poste #'.$id. ' n\'existe pas !');
+        if (!$poste) {
+            throw $this->createNotFoundException('Le poste #' . $id . ' n\'existe pas !');
         }
 
-        if($answer == null)
-        {
+        if ($answer == null) {
             $answer = new Answer;
         }
 
@@ -123,8 +141,7 @@ class ForumController extends AbstractController
         $form = $this->createForm(AnswerType::class, $answer);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $answer->setDate(new \DateTime());
             $answer->setUser($this->getUser());
             $answer->setPoste($poste);
@@ -156,14 +173,14 @@ class ForumController extends AbstractController
         $user = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
 
-        if(!$user){
+        if (!$user) {
             return $this->json([
                 'code' => 403,
                 'message' => "Vous devez être connecté"
             ], 403);
         }
 
-        if($poste->isLiked($user)) {
+        if ($poste->isLiked($user)) {
             $like = $likeRepo->findOneBy([
                 'poste' =>  $poste,
                 'user' => $user
@@ -181,7 +198,7 @@ class ForumController extends AbstractController
 
         $like = new PosteLike();
         $like->setPoste($poste)
-             ->setUser($user);
+            ->setUser($user);
 
         $manager->persist($like);
         $manager->flush();
@@ -201,14 +218,14 @@ class ForumController extends AbstractController
         $user = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
 
-        if(!$user){
+        if (!$user) {
             return $this->json([
                 'code' => 403,
                 'message' => "Vous devez être connecté"
             ], 403);
         }
 
-        if($poste->isDisliked($user)) {
+        if ($poste->isDisliked($user)) {
             $dislike = $dislikeRepo->findOneBy([
                 'poste' =>  $poste,
                 'user' => $user
@@ -226,7 +243,7 @@ class ForumController extends AbstractController
 
         $dislike = new PosteDislike();
         $dislike->setPoste($poste)
-             ->setUser($user);
+            ->setUser($user);
 
         $manager->persist($dislike);
         $manager->flush();
@@ -238,4 +255,3 @@ class ForumController extends AbstractController
         ], 200);
     }
 }
-

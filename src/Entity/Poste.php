@@ -35,7 +35,9 @@ class Poste
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity=PosteLangage::class, mappedBy="postes")
+     * @ORM\ManyToMany(targetEntity=PosteLangage::class, inversedBy="postes")
+     * @ORM\JoinColumn(name="poste_langage_poste", referencedColumnName="poste_id")
+     * @ORM\JoinTable(name="poste_langage_poste")
      */
     private $langages;
 
