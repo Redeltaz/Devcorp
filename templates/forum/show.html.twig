@@ -1,18 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Créer un poste
+    {{ poste.title }}
 {% endblock %}
 {% block stylesheets %}
     <link href="{{ asset("css/forum/show.css") }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-    <h1>Voici le poste</h1>
-    <h2>{{ poste.title }}</h2>
-    <p>{{ poste.content }}</p>
-    {% for langages in poste.langages %}
-            <p>{{ langages.langage }}</p>
-    {% endfor %}
-    <a href="{{ path("forum_home")}}">Retourner à l'accueil</a>
+    <div class="container">
+        <h1>Voici le poste</h1>
+        <h1>{{ poste.title }}</h1>
+        <p>{{ poste.content }}</p>
+        <div class="posteLangages">
+            {% for langages in poste.langages %}
+                    <p>{{ langages.langage }}</p>
+            {% endfor %}
+        </div><br>
+        <div class="review">
+            <a class="like" href="{{ path('forum_poste_like', {'id': poste.id}) }}">like</a>
+            <p class="likeDisplay">{{ poste.posteLikes | length }}</p>
+            <a class="dislike" href="{{ path('forum_poste_dislike', {'id': poste.id}) }}">dislike</a>
+            <p class="dislikeDisplay">{{ poste.posteDislikes | length }}</p>
+        </div>
+        {% if user is same as(poste.user) %}
+            <a href="{{ path('forum_update', { id:poste.id }) }}">Modifier</a><br>
+        {% endif %}
+        <a href="{{ path("forum_home")}}">Retourner à l'accueil</a>
+    </div>
+    <hr>
+    <div>
+    {% if user is same as(NULL) %}
+        <p><a href="{{ path('connexion') }}">Connectez vous</a> pour répondre</p>
+    {% else %}
+        {{ form(answerForm) }}
+    {% endif %}
+    </div>
+    <div class="answerContainer">
+        {% for answer in answers %}
+        <div class="answerContent">
+            <p>{{ answer.user.pseudo }}</p>
+            <p>{{ answer.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script src="{{ asset('js/forum/show.js') }}"></script>
 {% endblock %}

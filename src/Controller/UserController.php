@@ -20,8 +20,10 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
+        dd($this->getUser());
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
+            'user' => $this->getUser()
         ]);
     }
 
@@ -44,7 +46,7 @@ class UserController extends AbstractController
             $user->setPassword($hash);
             $user->setCreationDate(new \DateTime());
             $user->setPicture("new");
-            $user->setGrade(1);
+            $user->setGrade(0);
             $manager->persist($user);
             $manager->flush();
 
@@ -52,7 +54,8 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/inscription.html.twig', [
-            'inscriptionForm'=> $form->createView()
+            'inscriptionForm'=> $form->createView(),
+            'user' => $this->getUser()
         ]);
     }
 
@@ -60,14 +63,10 @@ class UserController extends AbstractController
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function connexion(Request $request, User $user = null): Response
+    public function connexion(): Response
     {   
-    
-        $user = new User;
-        $manager = $this->getDoctrine()->getManager();
-
         return $this->render('user/connexion.html.twig', [
-            
+            'user' => $this->getUser()
         ]);
     }
 
@@ -77,6 +76,8 @@ class UserController extends AbstractController
      */
     public function logout(): Response
     {
-        return $this->render('user/connexion.html.twig');
+        return $this->render('user/connexion.html.twig', [
+            'user' => $this->getUser()
+        ]);
     }
 }

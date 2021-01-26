@@ -1,9 +1,9 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-.title{
+.title {
     text-align: center;
 }
 
@@ -11,16 +11,34 @@
     margin-top: 20px;
 }
 
-.content{
+.content {
     margin-bottom: 20px;
 }
 
-.langages{
+.posteLangages {
     margin-top: 10px;
     background-color: rgb(216, 216, 216);
     display: inline-block;
 }
 
-.langages p{
+.posteUser {
+    background-color: black;
+    color: white;
+    display: inline-block;
+}
+
+.langages p {
     margin-right: 5px;
+}
+
+.choice {
+    margin-top: 20px;
+}
+
+.posteUser {
+    color: white;
+}
+
+.show {
+    color: black;
 }

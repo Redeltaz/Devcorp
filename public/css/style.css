@@ -158,10 +158,14 @@ select{
 
 }
 
-#forum-card-help,
-#forum-card-maj{
+#forum-card-help{
     border-right: 1px solid white;
+    padding-right: 15px;
 
+}
+
+#forum-card-maj{
+    padding-left: 15px;
 }
 
 #forum-card-help>h1,

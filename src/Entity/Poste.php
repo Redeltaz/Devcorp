@@ -35,7 +35,9 @@ class Poste
     private $date;
 
     /**
-     * @ORM\ManyToMany(targetEntity=PosteLangage::class, mappedBy="postes")
+     * @ORM\ManyToMany(targetEntity=PosteLangage::class, inversedBy="postes")
+     * @ORM\JoinColumn(name="poste_langage_poste", referencedColumnName="poste_id")
+     * @ORM\JoinTable(name="poste_langage_poste")
      */
     private $langages;
 
@@ -45,9 +47,27 @@ class Poste
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="poste")
+     */
+    private $answers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PosteLike::class, mappedBy="poste")
+     */
+    private $posteLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=PosteDislike::class, mappedBy="poste")
+     */
+    private $posteDislikes;
+
     public function __construct()
     {
         $this->langages = new ArrayCollection();
+        $this->answers = new ArrayCollection();
+        $this->posteLikes = new ArrayCollection();
+        $this->posteDislikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,5 +148,117 @@ class Poste
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Answer[]
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Answer $answer): self
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers[] = $answer;
+            $answer->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Answer $answer): self
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getPoste() === $this) {
+                $answer->setPoste(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PosteLike[]
+     */
+    public function getPosteLikes(): Collection
+    {
+        return $this->posteLikes;
+    }
+
+    public function addPosteLike(PosteLike $posteLike): self
+    {
+        if (!$this->posteLikes->contains($posteLike)) {
+            $this->posteLikes[] = $posteLike;
+            $posteLike->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosteLike(PosteLike $posteLike): self
+    {
+        if ($this->posteLikes->removeElement($posteLike)) {
+            // set the owning side to null (unless already changed)
+            if ($posteLike->getPoste() === $this) {
+                $posteLike->setPoste(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PosteDislike[]
+     */
+    public function getPosteDislikes(): Collection
+    {
+        return $this->posteDislikes;
+    }
+
+    public function addPosteDislike(PosteDislike $posteDislike): self
+    {
+        if (!$this->posteDislikes->contains($posteDislike)) {
+            $this->posteDislikes[] = $posteDislike;
+            $posteDislike->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removePosteDislike(PosteDislike $posteDislike): self
+    {
+        if ($this->posteDislikes->removeElement($posteDislike)) {
+            // set the owning side to null (unless already changed)
+            if ($posteDislike->getPoste() === $this) {
+                $posteDislike->setPoste(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isLiked(User $user): bool
+    {
+        foreach($this->posteLikes as $like){
+            if($like->getUser() === $user){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isDisliked(User $user): bool
+    {
+        foreach($this->posteDislikes as $dislike){
+            if($dislike->getUser() === $user){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

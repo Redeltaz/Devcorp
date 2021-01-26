@@ -19,8 +19,12 @@
                 <a><p>Cours</p></a>
                 <a><p>Equipe</p></a>
                 <input type="text" id="search-bar" name="search-bar" placeholder="RECHERCHER">
-                <a href=" {{ path("connexion") }}"><p>Connexion</p></a>
-                <a href=" {{ path("inscription") }}"><p>Inscription</p></a>
+                {% if user is same as(NULL) %}
+                    <a href=" {{ path("connexion") }}"><p>Connexion</p></a>
+                    <a href=" {{ path("inscription") }}"><p>Inscription</p></a>
+                {% else %}
+                    <a href=" {{ path("deconnexion") }}"><p>Deconnexion</p></a>
+                {% endif %}
             </div>
         </nav>
         {% block body %}{% endblock %}

@@ -25,7 +25,9 @@ class PosteLangage
     private $langage;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Poste::class, inversedBy="langages")
+     * @ORM\ManyToMany(targetEntity=Poste::class, mappedBy="langages")
+     * @ORM\JoinColumn(name="poste_langage_poste", referencedColumnName="poste_langage_id")
+     * @ORM\JoinTable(name="poste_langage_poste")
      */
     private $postes;
 

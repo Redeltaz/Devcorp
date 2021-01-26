@@ -2,3 +2,25 @@
     margin: 0;
     padding: 0;
 }
+
+h1:first-child{
+    text-align: center;
+}
+
+.posteLangages{
+    margin-top: 10px;
+    background-color: rgb(216, 216, 216);
+    display: inline-block;
+}
+
+.review{
+    display: flex;
+}
+
+.review p{
+    margin-right: 10px;
+}
+
+.answerContent:nth-child(odd){
+    background-color: rgb(196, 196, 196);
+}
