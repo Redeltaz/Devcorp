@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit{% endblock %}
+
+{% block body %}
+
+<div id="infos"> 
+    <p>Pseudo : {{ user.pseudo }}</p>
+    <p>Email : {{ user.email }}</p>
+    <p>Votre grade : 
+    {% if user.grade == 0 %}
+        Basique
+    {% elseif user.grade == 1 %}
+     VIP
+    {% endif %}
+    <p>Photo de profil :</p>
+    <img src="{{ asset('uploads/' ~ user.picture) }}">
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.image) }}
+
+    {{ form_end(form) }}
+
+    <a href=" {{ path('edit') }}">Editer le profil</a>
+</div>
+
+{% endblock %}
