@@ -18,6 +18,11 @@
     <a href="{{ path('forum_home') }}">-All Langages-</a>
     </div>
 
+    <div>
+        <label for="search">Rechercher : </label>
+        <input type="text" id="search" class="search">
+    </div>
+
     <div class="container">
         {% for elem in postes %}
         <hr>
@@ -37,4 +42,6 @@
         <p>Aucun poste n'existe</p>
         {% endfor %}
     </div>
+
+    <script src="{{ asset('js/forum/index.js') }}"></script>
 {% endblock %}

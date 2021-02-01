@@ -18,6 +18,8 @@ use App\Repository\PosteRepository;
 use App\Repository\AnswerRepository;
 use App\Repository\PosteDislikeRepository;
 use App\Repository\PosteLikeRepository;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ForumController extends AbstractController
 {
@@ -32,29 +34,64 @@ class ForumController extends AbstractController
 
         $postes = $repo->findBy([], ['date' => 'DESC']);
 
-        if ($langage === null) {
+        if($langage){
+            $specificPoste = [];
+
+            foreach ($postes as $posteRender) {
+                foreach ($posteRender->getLangages() as $langagePoste) {
+                    if ($langagePoste->getLangage() === $langage) {
+                        array_push($specificPoste, $posteRender);
+                    }
+                }
+            }
+
             return $this->render('forum/index.html.twig', [
-                'postes' => $postes,
+                'postes' => $specificPoste,
                 'langages' => $allLangages,
                 'user' => $this->getUser()
             ]);
         }
 
-        $specificPoste = [];
-
-        foreach ($postes as $posteRender) {
-            foreach ($posteRender->getLangages() as $langagePoste) {
-                if ($langagePoste->getLangage() === $langage) {
-                    array_push($specificPoste, $posteRender);
-                }
-            }
-        }
-
         return $this->render('forum/index.html.twig', [
-            'postes' => $specificPoste,
+            'postes' => $postes,
             'langages' => $allLangages,
             'user' => $this->getUser()
         ]);
+    }
+
+    /**
+     * @Route("/forum/allPostes", name="forum_all_postes")
+     */
+    public function allPostes(PosteRepository $repo, Request $request)
+    {
+        $search = $request->query->get('search');
+
+        if($search){
+            $postes = $repo->findByLetter($search);
+        }else{
+            $postes = $repo->findBy([], ['date' => 'DESC']);
+        }
+
+        $jsonPostes = array();
+
+            foreach($postes as $poste)
+            {
+                foreach($poste->getLangages() as $langage)
+                {
+                    $jsonLangages[] = $langage->getLangage();
+                }
+                $jsonPostes[] = array(
+                    'id' => $poste->getId(),
+                    'title' => $poste->getTitle(),
+                    'content' => $poste->getContent(),
+                    'date' => $poste->getDate(),
+                    'user' => $poste->getUser()->getPseudo(),
+                    'langages' => $jsonLangages
+                );
+                $jsonLangages = [];
+            }
+
+        return new JsonResponse($jsonPostes);
     }
 
     /**
@@ -168,7 +205,7 @@ class ForumController extends AbstractController
     /**
      *@Route("forum/show/{id}/like", name="forum_poste_like")
      */
-    public function posteLike(Poste $poste, PosteLikeRepository $likeRepo)
+    public function posteLike(Poste $poste, PosteLikeRepository $likeRepo, PosteDislikeRepository $dislikeRepo)
     {
         $user = $this->getUser();
         $manager = $this->getDoctrine()->getManager();

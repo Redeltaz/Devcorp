@@ -19,6 +19,16 @@ class PosteRepository extends ServiceEntityRepository
         parent::__construct($registry, Poste::class);
     }
 
+    public function findByLetter($letter)
+    {
+        return $this->createQueryBuilder('p')
+                ->andWhere('p.title like :search')
+                ->setParameter('search', $letter.'%')
+                ->orderBy('p.date', 'DESC')
+                ->getQuery()
+                ->getResult();
+    }
+
     // /**
     //  * @return Poste[] Returns an array of Poste objects
     //  */
