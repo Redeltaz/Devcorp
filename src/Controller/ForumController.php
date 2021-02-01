@@ -229,8 +229,19 @@ class ForumController extends AbstractController
             return $this->json([
                 'code' => 200,
                 'message' => 'Like supprimé',
-                'likes' => $likeRepo->count(['poste' => $poste])
+                'likes' => $likeRepo->count(['poste' => $poste]),
+                'dislikes' => $dislikeRepo->count(['poste' => $poste])
             ], 200);
+        }
+
+        if ($poste->isDisliked($user)) {
+            $dislike = $dislikeRepo->findOneBy([
+                'poste' =>  $poste,
+                'user' => $user
+            ]);
+
+            $manager->remove($dislike);
+            $manager->flush();
         }
 
         $like = new PosteLike();
@@ -243,14 +254,15 @@ class ForumController extends AbstractController
         return $this->json([
             'code' => 200,
             'message' => 'Ajout like',
-            'likes' => $likeRepo->count(['poste' => $poste])
+            'likes' => $likeRepo->count(['poste' => $poste]),
+            'dislikes' => $dislikeRepo->count(['poste' => $poste])
         ], 200);
     }
 
     /**
      *@Route("forum/show/{id}/dislike", name="forum_poste_dislike")
      */
-    public function posteDislike(Poste $poste, PosteDislikeRepository $dislikeRepo)
+    public function posteDislike(Poste $poste, PosteDislikeRepository $dislikeRepo, PosteLikeRepository $likeRepo)
     {
         $user = $this->getUser();
         $manager = $this->getDoctrine()->getManager();
@@ -274,8 +286,19 @@ class ForumController extends AbstractController
             return $this->json([
                 'code' => 200,
                 'message' => 'Dislike supprimé',
-                'dislikes' => $dislikeRepo->count(['poste' => $poste])
+                'dislikes' => $dislikeRepo->count(['poste' => $poste]),
+                'likes' => $likeRepo->count(['poste' => $poste])
             ], 200);
+        }
+
+        if ($poste->isLiked($user)) {
+            $like = $likeRepo->findOneBy([
+                'poste' =>  $poste,
+                'user' => $user
+            ]);
+
+            $manager->remove($like);
+            $manager->flush();
         }
 
         $dislike = new PosteDislike();
@@ -288,7 +311,8 @@ class ForumController extends AbstractController
         return $this->json([
             'code' => 200,
             'message' => 'Ajout dislike',
-            'dislikes' => $dislikeRepo->count(['poste' => $poste])
+            'dislikes' => $dislikeRepo->count(['poste' => $poste]),
+            'likes' => $likeRepo->count(['poste' => $poste])
         ], 200);
     }
 }

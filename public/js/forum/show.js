@@ -17,6 +17,7 @@ like.addEventListener('click', async (e) => {
 
     let data = await res.json()
     totalLike.textContent = data.likes
+    totalDislike.textContent = data.dislikes
 })
 
 dislike.addEventListener('click', async (e) => {
@@ -33,4 +34,5 @@ dislike.addEventListener('click', async (e) => {
 
     let data = await res.json()
     totalDislike.textContent = data.dislikes
+    totalLike.textContent = data.likes
 })
