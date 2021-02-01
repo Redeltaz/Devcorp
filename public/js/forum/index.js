@@ -14,6 +14,11 @@ searchInput.addEventListener('input', async () => {
     let data = await res.json()
 
     container.innerHTML = ""
+
+    if(data.length === 0){
+        container.innerHTML = '<p>Il n\'existe aucun poste à ce nom</p>'
+    }
+
     data.forEach((poste) => {
         let newPoste = document.createElement('div')
         newPoste.setAttribute('class', 'content')
