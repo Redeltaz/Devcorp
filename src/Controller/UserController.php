@@ -16,6 +16,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\Product;
 use App\Form\ProductType;
+use App\Form\UserImageType;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -41,8 +42,10 @@ class UserController extends AbstractController
     public function profile(Request $request, SluggerInterface $slugger): Response
     {
 
+        $manager = $this->getDoctrine()->getManager();
+
         $user = $this->getUser();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserImageType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -52,6 +55,9 @@ class UserController extends AbstractController
                 $originalFilename = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $user->getId() . '_' . $user->getPseudo() . '.' . $image->guessExtension();
+                $user->setPicture($newFilename);
+                $manager->persist($user);
+                $manager->flush();
             }
 
             try {
@@ -61,8 +67,6 @@ class UserController extends AbstractController
                 );
             } catch (FileException $e) {
             }
-
-            $user->setPicture($newFilename);
         }
 
 
@@ -90,7 +94,7 @@ class UserController extends AbstractController
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
             $user->setCreationDate(new \DateTime());
-            $user->setPicture("new");
+            $user->setPicture('new');
             $user->setGrade(0);
             $manager->persist($user);
             $manager->flush();
@@ -108,11 +112,23 @@ class UserController extends AbstractController
     /**
      * @Route("profile/edit", name="edit")
      */
-    public function editprofile(): Response
+    public function editprofile(Request $request): Response
     {
+
+
+        $user = $this->getUser();
+        $manager = $this->getDoctrine()->getManager();
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($user);
+            $manager->flush();
+        }
 
         return $this->render('user/editprofile.html.twig', [
             'user' => $this->getUser(),
+            'form' => $form->createView()
         ]);
     }
 
