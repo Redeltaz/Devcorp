@@ -4,19 +4,22 @@
 
 {% block body %}
 
-<h1>Connexion</h1>
+<h1 class="titre">Connexion</h1>
 
-<form action="{{ path('connexion') }}" method="post">
-    <div>
-        <input placeholder="Adresse mail ..." required name="_username" type="text">
+<form action="{{ path('connexion') }}" method="post" class="formConnexion">
+
+    <div class="connexion">
+        <i class="fas fa-user"></i>
+        <input placeholder="Adresse mail ..." required name="_username" type="text" id="email">
+    </div>
+
+    <div class="connexion">
+        <i class="fas fa-lock"></i>
+        <input placeholder="Mot de passe ..." required name="_password" type="password" id="motDePasse">
     </div>
 
     <div>
-        <input placeholder="Mot de passe ..." required name="_password" type="password">
-    </div>
-
-    <div>
-        <button type="submit">Connexion</button>
+        <button type="submit" id="bouton">Connexion</button>
     </div>
 </form>
 

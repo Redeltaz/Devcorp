@@ -6,7 +6,7 @@
 }
 
 nav{
-    background-color: #F5AE20;
+    background-color: #dd9d1d;
     display: flex;
 }
 
@@ -69,7 +69,7 @@ select{
 
 #header-content{
     text-align: center;
-    background-color: rgba(53, 176, 233, 0.815);
+    background-color: rgba(88, 192, 240, 0.815);
 }
 
 #header-content>p{
@@ -339,6 +339,40 @@ select{
     margin-right: 20px;
 }
 
+.titre {
+    text-align: center;
+    margin: 20px;
+}
+
+.formConnexion {
+    text-align: center;
+}
+
+.connexion {
+    margin: 20px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#email, #motDePasse{
+    padding: 5px;
+    width: 250px;
+    font-size: 20px;
+    border: none;
+}
+
+
+#bouton {
+    margin-top: 25px ;
+    padding: 5px;
+    font-size: 20px;
+    background-color: rgb(105, 186, 105);
+    box-shadow: 2px 4px 4px black;
+    border: none;
+}
+
 
 @media screen and (max-width: 1025px){
     nav{
@@ -452,3 +486,4 @@ select{
 
  
 }
+
