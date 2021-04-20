@@ -23,8 +23,9 @@
             <a class="dislike" href="{{ path('forum_poste_dislike', {'id': poste.id}) }}">dislike</a>
             <p class="dislikeDisplay">{{ poste.posteDislikes | length }}</p>
         </div>
-        {% if user is same as(poste.user) %}
+        {% if (user is same as(poste.user)) or (isAdmin) %}
             <a href="{{ path('forum_update', { id:poste.id }) }}">Modifier</a><br>
+            <a href="{{ path('forum_delete', { id:poste.id }) }}">Supprimer</a><br>
         {% endif %}
         <a href="{{ path("forum_home")}}">Retourner à l'accueil</a>
     </div>
@@ -41,6 +42,9 @@
         <div class="answerContent">
             <p>{{ answer.user.pseudo }}</p>
             <p>{{ answer.content }}</p>
+            {% if (answer.getUser() == user) or (isAdmin) %}
+                <a href="{{ path('forum_answer_delete', { id:answer.id, poste_id:poste.id }) }}">Supprimer</a>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

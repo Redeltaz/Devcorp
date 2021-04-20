@@ -14,8 +14,8 @@ window.addEventListener("resize", () => {
 
 responsiveButton.addEventListener("click", () => {
     if (isShowed == false) {
-        navContent.style.cssText = "display: flex; height : 75vh"
-        nav.style.cssText = "height: 100vh; position: fixed; width:100%"
+        navContent.style.cssText = "display: flex; height : 45vh"
+        nav.style.cssText = "height: 50vh; position: fixed; width:100%"
         searchBar.style.display = "none"
         isShowed = true
     } else {

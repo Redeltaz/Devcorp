@@ -129,8 +129,15 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum/update/{id}", name="forum_update")
      */
-    public function update(Request $request, Poste $poste = null): Response
+    public function update($id, Request $request, Poste $poste = null, PosteRepository $posteRepo): Response
     {
+        $connectedUser = $this->getUser();
+        $actualPoste = $posteRepo->find($id);
+        $posteCreator = $actualPoste->getUser();
+        if($connectedUser === null || $connectedUser !== $posteCreator){
+            return $this->redirectToRoute('forum_home');
+        }
+
         if ($poste == null) {
             $poste = new Poste;
         }
@@ -164,6 +171,13 @@ class ForumController extends AbstractController
     {
         $poste = $posteRepo->find($id);
         $answers = $poste->getAnswers();
+        $user = $this->getUser();
+
+        if($user->getGrade() === 1){
+            $isAdmin = true;
+        }else {
+            $isAdmin = false;
+        }
 
         if (!$poste) {
             throw $this->createNotFoundException('Le poste #' . $id . ' n\'existe pas !');
@@ -189,7 +203,8 @@ class ForumController extends AbstractController
                 'id' => $poste->getId(),
                 'answers' => $answers,
                 'user' => $this->getUser(),
-                'answerForm' => $form->createView()
+                'answerForm' => $form->createView(),
+                'isAdmin' => $isAdmin
             ]);
         }
 
@@ -197,9 +212,50 @@ class ForumController extends AbstractController
         return $this->render('forum/show.html.twig', [
             'poste' => $poste,
             'answers' => $answers,
-            'user' => $this->getUser(),
-            'answerForm' => $form->createView()
+            'user' => $user,
+            'answerForm' => $form->createView(),
+            'isAdmin' => $isAdmin
         ]);
+    }
+
+    /**
+     * @Route("/forum/delete/{id}", name="forum_delete")
+     */
+    public function delete($id, Request $request, PosteRepository $posteRepo): Response
+    {
+        $connectedUser = $this->getUser();
+        $actualPoste = $posteRepo->find($id);
+        $posteCreator = $actualPoste->getUser();
+        if($connectedUser === null || $connectedUser !== $posteCreator && $connectedUser->getGrade() !== 1){
+            return $this->redirectToRoute('forum_home');
+        }
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($actualPoste);
+        $manager->flush();
+
+        return $this->redirectToRoute('forum_home');
+    }
+
+    /**
+     * @Route("/forum/delete/{poste_id}/answer/{id}", name="forum_answer_delete")
+     */
+    public function deleteAnswer($poste_id, $id, Request $request, AnswerRepository $answerRepo): Response
+    {
+        $connectedUser = $this->getUser();
+        $actualAnswer = $answerRepo->find($id);
+        $answerCreator = $actualAnswer->getUser();
+        if($connectedUser === null || $connectedUser !== $answerCreator && $connectedUser->getGrade() !== 1){
+            return $this->redirectToRoute('forum_home');
+        }
+
+        $manager = $this->getDoctrine()->getManager();
+
+        $manager->remove($actualAnswer);
+        $manager->flush();
+
+        return $this->redirectToRoute('forum_show', ['id' => $poste_id]);
     }
 
     /**
