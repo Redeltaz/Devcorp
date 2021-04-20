@@ -7,15 +7,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
-use App\Entity\Upload;
-use App\Entity\UserLangage;
-use App\Form\UploadType;
 use App\Form\UserInscriptionType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Entity\Product;
-use App\Form\ProductType;
 use App\Form\UserImageType;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -29,7 +24,6 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        dd($this->getUser());
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
             'user' => $this->getUser()
@@ -45,6 +39,7 @@ class UserController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
 
         $user = $this->getUser();
+        $user_posts = $user->getPostes();
         $form = $this->createForm(UserImageType::class, $user);
         $form->handleRequest($request);
 
@@ -73,6 +68,7 @@ class UserController extends AbstractController
 
         return $this->render('user/profile.html.twig', [
             'user' => $this->getUser(),
+            'user_posts' => $user_posts,
             'form' => $form->createView(),
         ]);
     }

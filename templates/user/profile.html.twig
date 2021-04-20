@@ -4,25 +4,40 @@
 
 {% block body %}
 
-<div id="infos"> 
-    <p>Pseudo : {{ user.pseudo }}</p>
-    <p>Email : {{ user.email }}</p>
-    <p>Votre grade : 
-    {% if user.grade == 0 %}
-        Basique
-    {% elseif user.grade == 1 %}
-     VIP
-    {% endif %}
-    <p>Photo de profil :</p>
-    <img src="{{ asset('uploads/' ~ user.picture) }}">
+    <div id="switch-buttons-container">
+        <p>Informations</p>
+        <p>Posts</p>
+    </div>
 
-    {{ form_start(form) }}
+    <main id="infos">
+        <p>Pseudo : {{ user.pseudo }}</p>
+        <p>Email : {{ user.email }}</p>
+        <p>Votre grade :
+        {% if user.grade == 0 %}
+            Basique
+        {% elseif user.grade == 1 %}
+         VIP
+        {% endif %}
+        <p>Photo de profil :</p>
+        <img src="{{ asset('uploads/' ~ user.picture) }}">
 
-        {{ form_row(form.image) }}
+        {{ form_start(form) }}
 
-    {{ form_end(form) }}
+            {{ form_row(form.image) }}
 
-    <a href=" {{ path('edit') }}">Editer le profil</a>
-</div>
+        {{ form_end(form) }}
+
+        <a href=" {{ path('edit') }}">Editer le profil</a>
+
+
+    </main>
+
+    <main id="user-posts">
+        {% for user_post in user_posts %}
+            <p>{{ user.pseudo }}</p>
+            <p>{{ user_post.title }}</p>
+            <p>{{ user_post.content }}</p>
+        {% endfor %}
+    </main>
 
 {% endblock %}
