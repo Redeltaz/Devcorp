@@ -2,20 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Projet;
+use App\Form\ProjetType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
-use App\Entity\Upload;
-use App\Entity\UserLangage;
-use App\Form\UploadType;
 use App\Form\UserInscriptionType;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Entity\Product;
-use App\Form\ProductType;
 use App\Form\UserImageType;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -29,7 +26,6 @@ class UserController extends AbstractController
      */
     public function index(): Response
     {
-        dd($this->getUser());
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
             'user' => $this->getUser()
@@ -39,12 +35,12 @@ class UserController extends AbstractController
     /**
      * @Route("/profile", name="profile")
      */
-    public function profile(Request $request, SluggerInterface $slugger): Response
+    public function profile(Request $request, SluggerInterface $slugger, Projet $projet = null): Response
     {
 
         $manager = $this->getDoctrine()->getManager();
-
         $user = $this->getUser();
+        $user_posts = $user->getPostes();
         $form = $this->createForm(UserImageType::class, $user);
         $form->handleRequest($request);
 
@@ -69,11 +65,26 @@ class UserController extends AbstractController
             }
         }
 
+        $projet = new Projet;
+        $projets = $user->getProjets();
+        $formProjet = $this->createForm(ProjetType::class, $projet);
+        $formProjet->handleRequest($request);
+
+        if ($formProjet->isSubmitted() && $formProjet->isValid()) {
+            $projet->setUser($user);
+            $manager->persist($projet);
+            $manager->flush();
+
+            return $this->redirectToRoute('profile');
+        }
 
 
-        return $this->render('user/profile.html.twig', [
+            return $this->render('user/profile.html.twig', [
             'user' => $this->getUser(),
+            'user_posts' => $user_posts,
+            'projets' => $projets,
             'form' => $form->createView(),
+            'formProjet' => $formProjet->createView()
         ]);
     }
 
@@ -93,6 +104,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $user->setIsBanished(false);
             $user->setCreationDate(new \DateTime());
             $user->setPicture('new');
             $user->setGrade(0);

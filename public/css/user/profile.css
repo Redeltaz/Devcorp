@@ -1,0 +1,7 @@
+#switch-buttons-container{
+    display: flex;
+}
+
+#user-posts, #user-projects, #projects-form-container{
+    display: none;
+}

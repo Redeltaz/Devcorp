@@ -5,50 +5,6 @@
 
 }
 
-/* navbarre */
-
-nav{
-    background-color: #F5AE20;
-    display: flex;
-}
-
-
-nav>img{
-    display: flex;
-    justify-content: center;
-    max-width: 100px;
-    max-height: 100px;
-}
-
-#navbar-content{
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-}
-
-
-#navbar-content>a{
-    align-self: center;
-    color: white;
-    font-size: 22px;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-
-#search-bar{
-    align-self: center;
-    padding: 15px;
-    min-width: 30%;
-    border: none;
-    border-radius: 30px;
-    font-size: 22px;
-}
-
-#search-bar:focus,
-#code-input:focus{
-    outline: none;
-}
 
 
 :placeholder-shown{

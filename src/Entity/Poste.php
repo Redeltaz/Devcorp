@@ -48,17 +48,17 @@ class Poste
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="poste")
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="poste", orphanRemoval=true)
      */
     private $answers;
 
     /**
-     * @ORM\OneToMany(targetEntity=PosteLike::class, mappedBy="poste")
+     * @ORM\OneToMany(targetEntity=PosteLike::class, mappedBy="poste", orphanRemoval=true)
      */
     private $posteLikes;
 
     /**
-     * @ORM\OneToMany(targetEntity=PosteDislike::class, mappedBy="poste")
+     * @ORM\OneToMany(targetEntity=PosteDislike::class, mappedBy="poste", orphanRemoval=true)
      */
     private $posteDislikes;
 

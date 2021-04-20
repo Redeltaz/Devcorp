@@ -16,11 +16,18 @@
                 <img id="responsive-search" src="{{ asset("images/search-icon.png") }}">      
             </div>
             <div id="navbar-content">
+                <div>
                 <a href=" {{ path("home") }}"><p>Accueil</p></a>
                 <a href=" {{ path("forum_home") }}"><p>Forum</p></a>
+<<<<<<< HEAD
                 <a><p>Cours</p></a>
                 <a href=" {{ path("team") }}"><p>Equipe</p></a>
                 <input type="text" id="search-bar" name="search-bar" placeholder="RECHERCHER">
+=======
+                <a><p>Equipe</p></a>
+                </div>
+                <div>
+>>>>>>> c7d6500e6816da7ad2bb060cb9938952cf7120a4
                 {% if user is same as(NULL) %}
                     <a href=" {{ path("connexion") }}"><p>Connexion</p></a>
                     <a href=" {{ path("inscription") }}"><p>Inscription</p></a>
@@ -28,6 +35,7 @@
                     <a href=" {{ path('profile') }}"><p>Profile</p></a>
                     <a href=" {{ path("deconnexion") }}"><p>Deconnexion</p></a>
                 {% endif %}
+                </div>
             </div>
         </nav>
         {% block body %}{% endblock %}
