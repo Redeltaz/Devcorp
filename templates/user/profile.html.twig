@@ -10,6 +10,7 @@
     <div id="switch-buttons-container">
         <p id="switch-button-information">Informations</p>
         <p id="switch-button-posts">Posts</p>
+        <p id="switch-button-projects">Projets</p>
     </div>
 
     <main id="infos">
@@ -41,6 +42,22 @@
             <p>{{ user_post.title }}</p>
             <p>{{ user_post.content }}</p>
         {% endfor %}
+    </main>
+
+    <main id="user-projects">
+        {% for projet in projets %}
+            <p>{{ projet.title }}</p>
+            <p>{{ projet.description }}</p>
+            <a href="{{ projet.link }}">Github</a>
+        {% endfor %}
+
+        <button id="button-add-project">Rajoutez un projet</button>
+
+        <div id="projects-form-container">
+            {{ form_start(formProjet) }}
+
+            {{ form_end(formProjet) }}
+        </div>
     </main>
 
 {% endblock %}

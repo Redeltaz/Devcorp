@@ -76,12 +76,23 @@ class User implements UserInterface
      */
     private $posteDislikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Projet::class, mappedBy="user")
+     */
+    private $projets;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isBanished;
+
     public function __construct()
     {
         $this->postes = new ArrayCollection();
         $this->answers = new ArrayCollection();
         $this->posteLikes = new ArrayCollection();
         $this->posteDislikes = new ArrayCollection();
+        $this->projets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,6 +304,48 @@ class User implements UserInterface
                 $posteDislike->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Projet[]
+     */
+    public function getProjets(): Collection
+    {
+        return $this->projets;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projets->contains($projet)) {
+            $this->projets[] = $projet;
+            $projet->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getUser() === $this) {
+                $projet->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getIsBanished(): ?bool
+    {
+        return $this->isBanished;
+    }
+
+    public function setIsBanished(bool $isBanished): self
+    {
+        $this->isBanished = $isBanished;
 
         return $this;
     }

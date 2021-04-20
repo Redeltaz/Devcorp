@@ -2,6 +2,6 @@
     display: flex;
 }
 
-#user-posts{
+#user-posts, #user-projects, #projects-form-container{
     display: none;
 }
