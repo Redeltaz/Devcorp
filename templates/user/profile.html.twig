@@ -2,11 +2,14 @@
 
 {% block title %}Edit{% endblock %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/user/profile.css') }}"{% endblock %}
+
+
 {% block body %}
 
     <div id="switch-buttons-container">
-        <p>Informations</p>
-        <p>Posts</p>
+        <p id="switch-button-information">Informations</p>
+        <p id="switch-button-posts">Posts</p>
     </div>
 
     <main id="infos">
@@ -41,3 +44,5 @@
     </main>
 
 {% endblock %}
+{% block javascripts %}<script src="{{ asset('js/user/profile.js') }}" }}{% endblock %}
+
