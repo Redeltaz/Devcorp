@@ -28,6 +28,7 @@
         <hr>
         <div class="content">
             <a href="{{ path('forum_show', { id:elem.id }) }}" class="show">
+                <img src="{{ asset('uploads/' ~ user.picture) }}">
                 <h1 class="posteTitle">{{ elem.title }}</h1>
                 <p class="posteUser" class="posteUser">{{ elem.user }}</p>
                 <p class="posteContent">{{ elem.content }}</p>
