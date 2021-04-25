@@ -33,8 +33,10 @@
         <div class="content">
             <a href="{{ path('forum_show', { id:elem.id }) }}" class="show">
             <div class="card-top">
+            <div class="user">
                 <img class="userImg" src="{{ asset('uploads/' ~ elem.user.picture) }}">
                 <p class="posteUser" class="posteUser">{{ elem.user }}</p>
+            </div>
                 <div class="card-languages">
                   {% for langages in elem.langages %}
                     <p class="card-language">{{ langages.langage }}</p>

@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: 'Prompt';
+    font-family: 'Poppins', sans-serif;
 
 }
 
@@ -91,7 +91,7 @@
 }
 
 #forum-card{
-    background-color: #F5AE20;
+    background-color: #fa8500;
     display: flex;
     justify-content: space-around;
     border-radius: 50px;
@@ -135,7 +135,7 @@ hr{
 #left-div,
 #right-div{
     margin-top: 50px;
-    background-color: orange;
+    background-color: #fa8500;
     height: 500px;
     width: 5%;
 }
@@ -180,7 +180,6 @@ hr{
     border: solid 0.5px black;
     border-radius: 50px;
     padding: 20px;
-    padding-top: 500px;
 }   
 
 #container>ul{
@@ -207,7 +206,7 @@ hr{
 footer{
     display: flex;
     margin-top: 100px;
-    background-color: orange;
+    background-color: #fa8500;
     justify-content: space-between;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -228,7 +227,7 @@ footer{
 
 select{
     width: 200px;
-    background-color: orange;
+    background-color: #fa8500;
     color: white;
     font-size: 20px;
     padding-left: 10px;
