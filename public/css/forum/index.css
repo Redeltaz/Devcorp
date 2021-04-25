@@ -42,6 +42,7 @@ input {
 .languages{
     text-decoration: none;
     color: black;
+    padding: 15px;
 }
 
 .languages:hover{
