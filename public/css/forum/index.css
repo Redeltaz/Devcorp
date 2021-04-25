@@ -4,10 +4,12 @@
 }
 
 .title {
+    padding-top: 20px;
     text-align: center;
 }
 
 .search {
+   
     border:none;
 }
 
@@ -18,7 +20,6 @@
     border-radius: 5px;
     width: 400px;
     padding: 5px;
-    margin-left: 39%;
 }
 
 .container{
@@ -31,6 +32,7 @@
 
 .content {
     width: 29%;
+    max-width: 29%;
     height: 136px;
     max-height: 136px;
     /* border: solid rgb(179, 179, 179) 1px; */
@@ -78,4 +80,16 @@
 .posteContent{
     overflow: hidden;
     max-height: 50px;
+}
+.container-search{
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width:1024px){
+    
+    .container{
+        flex-flow :column wrap
+    }
+   
 }
