@@ -4,10 +4,10 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/user/profile.css') }}" {% endblock %} {% block body %} <section>
-<div id="switch-buttons-container">
-    <p id="switch-button-information">Informations</p>
-    <p id="switch-button-posts">Posts</p>
-    <p id="switch-button-projects">Projets</p>
+<div id="switch-buttons-container" class="onglet">
+    <p id="switch-button-information" class="ongletOne">Informations</p>
+    <p id="switch-button-posts" class="ongletTwo">Posts</p>
+    <p id="switch-button-projects" class="ongletThree">Projets</p>
 </div>
 
 <main id="infos">
@@ -21,8 +21,10 @@
                 Basique
                 {% elseif user.grade == 1 %}
                 VIP
-                {% endif %}<br/>
-                <a href=" {{ path('edit') }}">Editer le profil</a>
+                {% endif %}
+                </p>
+                <br/>
+                <a class="modifProfil" href=" {{ path('edit') }}">Editer le profil</a>
                 </div>
     </div>
     <div class="image">

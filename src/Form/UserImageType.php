@@ -17,12 +17,17 @@ class UserImageType extends AbstractType
     {
         $builder
             ->add('image', FileType::class, [
-                'label' => 'Changez votre image',
+                'label' => '',
                 'required' => false,
                 'mapped' => false,
-                'empty_data' => 'new'
+                'empty_data' => 'new',
+                'attr' => ['class' => 'test']
             ])
-            ->add('Envoyer', SubmitType::class);
+            ->add('Envoyer', SubmitType::class, [
+                'attr' => ['class' => 'test2']
+            ]
+            
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -6,12 +6,49 @@
     display: none;
 }
 
+.onglet {
+    justify-content: center;
+    margin: 10px;
+}
+.ongletOne {
+    border: solid;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.ongletOne:hover {
+    background-color: green;
+}
+
+.ongletTwo {
+    border: solid;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+.ongletTwo:hover {
+    background-color: blue;
+}
+.ongletThree {
+    border: solid;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+.ongletThree:hover {
+    background-color: brown;
+}
+
 #infos {
     display: flex;
     flex-direction: row-reverse;
     border: solid;
     margin: 20px;
-    background-size: cover;
+    height: 100%;
 }
 
 .info {
@@ -32,7 +69,29 @@
     width: 50%;
     padding: 50px;
 }
+.test {
+    cursor: pointer;
+    color: white;
+    background-color: orange;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.test2 {
+    display: none;
+}
+
 
 .picture {
     width:50%;
+}
+
+.modifProfil {
+    color: white;
+    background-color: orange;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
 }
