@@ -4,13 +4,36 @@
 }
 
 .title {
-    padding-top: 20px;
-    text-align: center;
+    padding: 30px;
+
 }
 
 .search {
    
     border:none;
+}
+
+.container-search{
+    display: flex;
+    justify-content: center;
+}
+.header-button{
+    text-decoration: none;
+    color: black;
+    border: solid black 1px;
+    padding: 5px;
+}
+.header-button:hover{
+    text-decoration: none;
+    color: white;
+    background-color:black;
+}
+.header {
+    text-align: center;
+    padding-bottom: 20px;
+}
+input {
+    outline:none;
 }
 
 .search-bar{
@@ -80,10 +103,6 @@
 .posteContent{
     overflow: hidden;
     max-height: 50px;
-}
-.container-search{
-    display: flex;
-    justify-content: center;
 }
 
 @media screen and (max-width:1024px){

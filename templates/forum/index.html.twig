@@ -8,12 +8,13 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="title">Bienvenue sur le forum</h1>
-    <a href="{{ path("forum_create") }}">Créer un poste</a><br>
-
+    <div class="header">
+        <h1 class="title">Bienvenue sur le forum</h1>
+        <a class="header-button" href="{{ path("forum_create") }}">Créer un poste</a><br>
+    </div>
     <div class="choice">
     {% for langageChoice in langages %}
-        <a href="{{ path('forum_home', {'langage': langageChoice.langage}) }}">{{ langageChoice.langage }}</a>
+        <a href="{{ path('forum_home', {'langage': langageChoice.langage}) }}" >{{ langageChoice.langage }}</a>
     {% endfor %}
     <a href="{{ path('forum_home') }}">-All Langages-</a>
     </div>
