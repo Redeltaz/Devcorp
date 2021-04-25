@@ -9,8 +9,8 @@ section {
     margin: 75px 0 75px 75px;
     width: 500px;
     height: 600px;
-    background-color: rgba(82, 69, 69, 0.308);
-    /* box-shadow: 7px 7px 7px 1px rgba(0, 0, 0, 0.2); */
+    background-color: rgba(223, 223, 223, 0.308);
+    box-shadow: 14px 14px 15px -1px rgba(245,174,32,0.6);
     border-radius: 30px;
 }
 
