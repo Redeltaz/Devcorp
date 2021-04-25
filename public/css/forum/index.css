@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+img {
+    object-fit: cover;
+}
 
 .title {
     padding: 30px;
@@ -39,6 +42,7 @@ input {
 .languages{
     text-decoration: none;
     color: black;
+    padding: 15px;
 }
 
 .languages:hover{
@@ -64,8 +68,8 @@ input {
 .content {
     width: 29%;
     max-width: 29%;
-    height: 136px;
-    max-height: 136px;
+    height: 146px;
+    max-height: 146px;
     /* border: solid rgb(179, 179, 179) 1px; */
     border-radius: 5px;
     margin-bottom: 70px;
@@ -90,11 +94,14 @@ input {
 .card-top{
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 5px;
 }
-
+.user {
+    display: flex;
+    align-items: center;
+}
 .card-languages {
-    margin-left: 50px;
     display: flex;
 }
 .card-language {
