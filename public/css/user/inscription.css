@@ -1,0 +1,45 @@
+#user_inscription {
+    text-align: center;
+}
+
+#user_inscription div {
+    margin: 20px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user_inscription div:nth-child(4) {
+    border: none;
+}
+
+#user_inscription input{
+    padding: 5px;
+    width: 270px;
+    font-size: 20px;
+    border: none;
+}
+
+
+#user_inscription button {
+    margin-top: 25px ;
+    padding: 15px 25px;
+    font-size: 20px;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 2px 4px 4px black;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 8px;
+}
+
+
+#user_inscription button:hover {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 4px 4px black;
+    border: 1px solid black;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}

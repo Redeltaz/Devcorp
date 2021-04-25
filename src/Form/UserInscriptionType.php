@@ -18,13 +18,13 @@ class UserInscriptionType extends AbstractType
     {
         $builder
             ->add('pseudo', null ,[
-                'attr' => ['class' => 'pseudo']
+                'attr' => ['class' => 'pseudo', 'placeholder'=>'Pseudo ...']
             ])
             ->add('email', null ,[
-                'attr' => ['class' => 'email']
+                'attr' => ['class' => 'email', 'placeholder'=>'Adresse mail ...']
             ])
             ->add('password', PasswordType::class,[
-                'attr' => ['class' => 'password']
+                'attr' => ['class' => 'password', 'placeholder'=>'Mot de passe ...']
             ])
             ->add('Envoyer', SubmitType::class,[
                 'attr' => ['class' => 'submit']

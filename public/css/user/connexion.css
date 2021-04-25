@@ -1,0 +1,65 @@
+
+
+.titre {
+    margin: 20px;
+}
+
+.formConnexion {
+    text-align: center;
+}
+
+.connexion {
+    margin: 20px;
+    border-bottom: 2px solid black;
+    text-align: center;
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#email, #motDePasse{
+    padding: 5px;
+    width: 250px;
+    font-size: 20px;
+    border: none;
+}
+
+
+#bouton {    
+    margin-top: 25px ;
+    padding: 15px 25px;
+    font-size: 20px;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 2px 4px 4px black;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 8px;
+}
+
+#bouton:hover {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 2px 4px 4px black;
+    border: 1px solid black;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.flex a {
+    margin-top: 25px ;
+    padding: 15px 55px;
+    font-size: 20px;
+    background-color: #F5AE20;
+    box-shadow: 2px 4px 4px rgba(75, 75, 75, 0.576);
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 15px;
+}
+
