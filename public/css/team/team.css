@@ -24,3 +24,7 @@ section {
 .card_content {
 text-align: center;
 }
+
+.description {
+    margin: 50px;
+}

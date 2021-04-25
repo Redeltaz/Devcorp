@@ -5,3 +5,34 @@
 #user-posts, #user-projects, #projects-form-container{
     display: none;
 }
+
+#infos {
+    display: flex;
+    flex-direction: row-reverse;
+    border: solid;
+    margin: 20px;
+   background-size: cover;
+}
+
+.info {
+    width: 50%;
+    padding: 50px;
+}
+
+.datas {
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.data {
+    padding-top: 20px;
+}
+
+.image {
+    width: 50%;
+    padding: 50px;
+}
+
+.picture {
+    width:50%;
+}
