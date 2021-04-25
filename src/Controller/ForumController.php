@@ -134,7 +134,7 @@ class ForumController extends AbstractController
         $connectedUser = $this->getUser();
         $actualPoste = $posteRepo->find($id);
         $posteCreator = $actualPoste->getUser();
-        if($connectedUser === null || $connectedUser !== $posteCreator){
+        if($connectedUser === null || $connectedUser !== $posteCreator && $connectedUser->getGrade() !== 1){
             return $this->redirectToRoute('forum_home');
         }
 
