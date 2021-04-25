@@ -7,38 +7,75 @@
     text-align: center;
 }
 
-.container {
-    margin-top: 20px;
+.search {
+    border:none;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: center;
+    border: solid grey 1px;
+    border-radius: 5px;
+    width: 400px;
+    padding: 5px;
+    margin-left: 39%;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around; 
+    flex-wrap: wrap;
+    margin-top: 40px;
 }
 
 .content {
-    margin-bottom: 20px;
+    width: 29%;
+    height: 136px;
+    max-height: 136px;
+    /* border: solid rgb(179, 179, 179) 1px; */
+    border-radius: 5px;
+    margin-bottom: 70px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.posteLangages {
-    margin-top: 10px;
-    background-color: rgb(216, 216, 216);
-    display: inline-block;
-}
-
-.posteUser {
-    background-color: black;
-    color: white;
-    display: inline-block;
-}
-
-.langages p {
-    margin-right: 5px;
-}
-
-.choice {
-    margin-top: 20px;
+.userImg{
+    overflow:hidden;
+    -webkit-border-radius:50px;
+    -moz-border-radius:50px;
+    border-radius:50px;
+    width:50px;
+    height:50px;
 }
 
 .posteUser {
-    color: white;
+    color: black;
+    padding-left: 10px;
+}
+
+
+.card-top{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.languages {
+    margin-left: 50px;
+}
+.language {
+    padding: 15px;
 }
 
 .show {
     color: black;
+}
+
+.card-bottom{
+    padding-left: 30px;
+}
+
+.posteContent{
+    overflow: hidden;
+    max-height: 50px;
 }
