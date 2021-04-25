@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block stylesheets %}
+    
+{% endblock %}
+
+{% block body %}
+    <p>Partie administrateur</p>
+
+    <a href="{{ path('admin_langage') }}">Gérer les langages</a>
+    <a href="{{ path('admin_users') }}">Gérer les utilisateurs</a>
+{% endblock %}

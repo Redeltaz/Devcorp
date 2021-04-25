@@ -173,7 +173,7 @@ class ForumController extends AbstractController
         $answers = $poste->getAnswers();
         $user = $this->getUser();
 
-        if($user->getGrade() === 1){
+        if($user !== null && $user->getGrade() === 1){
             $isAdmin = true;
         }else {
             $isAdmin = false;

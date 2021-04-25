@@ -2,64 +2,66 @@
 
 {% block title %}Edit{% endblock %}
 
-{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/user/profile.css') }}"{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/user/profile.css') }}" {% endblock %} {% block body %} <section>
+<div id="switch-buttons-container">
+    <p id="switch-button-information">Informations</p>
+    <p id="switch-button-posts">Posts</p>
+    <p id="switch-button-projects">Projets</p>
+</div>
 
-
-{% block body %}
-
-    <div id="switch-buttons-container">
-        <p id="switch-button-information">Informations</p>
-        <p id="switch-button-posts">Posts</p>
-        <p id="switch-button-projects">Projets</p>
+<main id="infos">
+    <div class="info">
+        <h2>Mes informations :</h2>
+        <div class="datas">
+            <p>Pseudo : {{ user.pseudo }}</p>
+            <p class="data">Email : {{ user.email }}</p>
+            <p class="data">Votre grade :
+                {% if user.grade == 0 %}
+                Basique
+                {% elseif user.grade == 1 %}
+                VIP
+                {% endif %}<br/>
+                <a href=" {{ path('edit') }}">Editer le profil</a>
+                </div>
     </div>
-
-    <main id="infos">
-        <p>Pseudo : {{ user.pseudo }}</p>
-        <p>Email : {{ user.email }}</p>
-        <p>Votre grade :
-        {% if user.grade == 0 %}
-            Basique
-        {% elseif user.grade == 1 %}
-         VIP
-        {% endif %}
-        <p>Photo de profil :</p>
-        <img src="{{ asset('uploads/' ~ user.picture) }}">
+    <div class="image">
+        <img src="{{ asset('uploads/' ~ user.picture) }}" class="picture">
 
         {{ form_start(form) }}
 
-            {{ form_row(form.image) }}
+        {{ form_row(form.image) }}
 
         {{ form_end(form) }}
+    </div>
+    
 
-        <a href=" {{ path('edit') }}">Editer le profil</a>
 
+</main>
 
-    </main>
+<main id="user-posts">
+    {% for user_post in user_posts %}
+    <p>{{ user.pseudo }}</p>
+    <p>{{ user_post.title }}</p>
+    <p>{{ user_post.content }}</p>
+    {% endfor %}
+</main>
 
-    <main id="user-posts">
-        {% for user_post in user_posts %}
-            <p>{{ user.pseudo }}</p>
-            <p>{{ user_post.title }}</p>
-            <p>{{ user_post.content }}</p>
-        {% endfor %}
-    </main>
+<main id="user-projects">
+    {% for projet in projets %}
+    <p>{{ projet.title }}</p>
+    <p>{{ projet.description }}</p>
+    <a href="{{ projet.link }}">Github</a>
+    {% endfor %}
 
-    <main id="user-projects">
-        {% for projet in projets %}
-            <p>{{ projet.title }}</p>
-            <p>{{ projet.description }}</p>
-            <a href="{{ projet.link }}">Github</a>
-        {% endfor %}
+    <button id="button-add-project">Rajoutez un projet</button>
 
-        <button id="button-add-project">Rajoutez un projet</button>
+    <div id="projects-form-container">
+        {{ form_start(formProjet) }}
 
-        <div id="projects-form-container">
-            {{ form_start(formProjet) }}
-
-            {{ form_end(formProjet) }}
-        </div>
-    </main>
-
+        {{ form_end(formProjet) }}
+    </div>
+</main>
+</section>
 {% endblock %}
 {% block javascripts %}<script src="{{ asset('js/user/profile.js') }}" }}{% endblock %}
-

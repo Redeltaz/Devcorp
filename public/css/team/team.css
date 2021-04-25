@@ -1,0 +1,30 @@
+section {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 75px 0 75px 75px;
+    width: 500px;
+    height: 600px;
+    background-color: rgba(223, 223, 223, 0.308);
+    box-shadow: 14px 14px 15px -1px rgba(245,174,32,0.6);
+    border-radius: 30px;
+}
+
+
+.team_picture {
+    width: 500px;
+    height: 300px;
+    border-radius: 30px 30px 0px 0px;
+}
+
+.card_content {
+text-align: center;
+}
+
+.description {
+    margin: 50px;
+}

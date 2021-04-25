@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block stylesheets %}
+    
+{% endblock %}
+    
+{% block body %}
+    <p>Liste des utilisateurs : </p>
+    <br>
+
+    {% for user in allUsers %}
+        <div>
+            <p>pseudo : {{ user.pseudo }}</p>
+            <p>email : {{ user.email }}</p>
+            <p>grade : 
+                {% if user.grade == 0 %}
+                    membre
+                {% elseif user.grade == 1 %}
+                    vip
+                {% endif %}
+            </p>
+            <p>Date de création : {{ user.creationDate|date("m/d/Y") }}</p>
+            {% if user.isBanished == 1 %}
+                <p>Bannis</p>
+                <a href="{{ path('admin_unban', {'id': user.id}) }}">Débannir</a>
+            {% else %}
+                <p>Non Banni</p>
+                <a href="{{ path('admin_ban', {'id': user.id}) }}">Bannir</a>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
