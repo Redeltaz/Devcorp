@@ -1,6 +1,16 @@
+
+body {
+    text-align: center;
+}
+.titre {
+    margin: 20px;
+    font-size: 40px;
+}
+
 #user_inscription {
     text-align: center;
 }
+
 
 #user_inscription div {
     margin: 20px;
@@ -42,4 +52,38 @@
     border: 1px solid black;
     cursor: pointer;
     color: rgb(0, 0, 0);
+}
+
+
+@media screen and (max-width: 1025px) {
+    .titre {
+        font-size: 80px;
+    }
+
+    #user_inscription div {
+        margin: 80px;
+        width: 520px;
+    }
+
+    #user_inscription label {
+        font-size: 60px;
+    }
+    #user_inscription input {
+        padding: 5px;
+        width:  500px;
+        font-size: 45px;
+        border: none;
+    }
+
+    #user_inscription button {
+        margin-top: 25px ;
+        padding: 15px 45px;
+        font-size: 60px;
+        background-color: rgb(28, 28, 28);
+        box-shadow: 4px 8px 8px rgba(75, 75, 75, 0.576);
+        border: none;
+        cursor: pointer;
+        color: white;
+        border-radius: 8px;
+    }
 }
