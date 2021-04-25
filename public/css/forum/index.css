@@ -36,6 +36,14 @@ input {
     outline:none;
 }
 
+.languages{
+    text-decoration: none;
+    color: black;
+}
+
+.languages:hover{
+    color: orange;
+}
 .search-bar{
     display: flex;
     justify-content: center;
@@ -85,10 +93,11 @@ input {
     padding: 5px;
 }
 
-.languages {
+.card-languages {
     margin-left: 50px;
+    display: flex;
 }
-.language {
+.card-language {
     padding: 15px;
 }
 

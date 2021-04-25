@@ -13,10 +13,11 @@
         <a class="header-button" href="{{ path("forum_create") }}">Créer un poste</a><br>
     </div>
     <div class="choice">
+    <a class="languages" href="{{ path('forum_home') }}" >All Langages</a>
     {% for langageChoice in langages %}
-        <a href="{{ path('forum_home', {'langage': langageChoice.langage}) }}" >{{ langageChoice.langage }}</a>
+        <a class="languages" href="{{ path('forum_home', {'langage': langageChoice.langage}) }}" >{{ langageChoice.langage }}</a>
     {% endfor %}
-    <a href="{{ path('forum_home') }}">-All Langages-</a>
+    
     </div>
     <div class="container-search">
         <div class="search-bar">
@@ -34,9 +35,9 @@
             <div class="card-top">
                 <img class="userImg" src="{{ asset('uploads/' ~ user.picture) }}">
                 <p class="posteUser" class="posteUser">{{ elem.user }}</p>
-                <div class="languages">
+                <div class="card-languages">
                   {% for langages in elem.langages %}
-                    <p class="language">{{ langages.langage }}</p>
+                    <p class="card-language">{{ langages.langage }}</p>
                   {% endfor %}
                 </div>
             </div>
