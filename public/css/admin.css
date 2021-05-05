@@ -101,3 +101,25 @@
     cursor: pointer;
     color: rgb(0, 0, 0);
 }
+
+
+.user {
+    margin: 20px;
+}
+
+.banne {
+    display: flex;
+}
+
+.debannir, .bannir {
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.debannir {
+    color: green;
+}
+
+.bannir {
+    color: red;
+}

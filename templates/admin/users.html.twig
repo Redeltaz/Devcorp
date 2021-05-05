@@ -4,16 +4,15 @@
     Admin
 {% endblock %}
 
-{% block stylesheets %}
-    
-{% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/admin.css') }}"{% endblock %}
+
     
 {% block body %}
-    <p>Liste des utilisateurs : </p>
+    <h1 class="titre">Liste des utilisateurs : </h1>
     <br>
 
     {% for user in allUsers %}
-        <div>
+        <div class="user">
             <p>pseudo : {{ user.pseudo }}</p>
             <p>email : {{ user.email }}</p>
             <p>grade : 
@@ -24,13 +23,15 @@
                 {% endif %}
             </p>
             <p>Date de création : {{ user.creationDate|date("m/d/Y") }}</p>
+            <div class="banne">
             {% if user.isBanished == 1 %}
                 <p>Bannis</p>
-                <a href="{{ path('admin_unban', {'id': user.id}) }}">Débannir</a>
+                <a href="{{ path('admin_unban', {'id': user.id}) }}" class="debannir">Débannir</a>
             {% else %}
                 <p>Non Banni</p>
-                <a href="{{ path('admin_ban', {'id': user.id}) }}">Bannir</a>
+                <a href="{{ path('admin_ban', {'id': user.id}) }}"  class="bannir">Bannir</a>
             {% endif %}
+            </div>
         </div>
         <hr>
     {% endfor %}
