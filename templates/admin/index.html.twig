@@ -3,14 +3,17 @@
 {% block title %}
     Admin
 {% endblock %}
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/admin.css') }}"{% endblock %}
 
-{% block stylesheets %}
-    
-{% endblock %}
+
 
 {% block body %}
-    <p>Partie administrateur</p>
-
-    <a href="{{ path('admin_langage') }}">Gérer les langages</a>
-    <a href="{{ path('admin_users') }}">Gérer les utilisateurs</a>
+    <div class="index">
+        <p>Partie administrateur</p>
+       
+        <div class="divBouton">
+            <a href="{{ path('admin_langage') }}" id="bouton">Gérer les langages</a>
+            <a href="{{ path('admin_users') }}" id="bouton">Gérer les utilisateurs</a>
+        </div>
+    </div>
 {% endblock %}

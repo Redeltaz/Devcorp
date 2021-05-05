@@ -14,7 +14,9 @@ class LangageType extends AbstractType
     {
         $builder
             ->add('langage')
-            ->add('Creer', SubmitType::class)
+            ->add('Creer', SubmitType::class ,[
+                'attr' => ['class' => 'bouton']
+            ])
         ;
     }
 

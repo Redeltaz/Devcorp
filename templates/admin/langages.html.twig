@@ -1,9 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/admin.css') }}"{% endblock %}
+
+
 {% block body %}
-<a href="{{ path('admin_langage_create') }}">Créer un langage</a><br>
-    {% for elem in langages %}
-        <a href="{{ path('admin_langage_modif', { id:elem.id }) }}">Modifier</a>
-        {{ elem.langage }}<br>
-    {% endfor %}
+        <div class="divBouton titre">
+            <a href="{{ path('admin_langage_create') }}" id="bouton">Créer un langage</a><br>
+        </div>   
+    <div class="langages">
+
+        {% for elem in langages %}
+                <div class="langue">
+
+                <a href="{{ path('admin_langage_modif', { id:elem.id }) }}"  id="modifBouton">Modifier</a>
+                {{ elem.langage }}<br>
+                        </div>
+
+            {% endfor %}
+    </div>
+
 {% endblock %}
