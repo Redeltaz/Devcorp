@@ -2,3 +2,41 @@
     margin: 0;
     padding: 0;
 }
+
+
+
+#create {
+    margin: 0 auto;
+    display: flex;
+    /* justify-content: center; */
+    margin-top: 100px;
+    border: solid 2px;
+  width: 60%;
+  padding: 25px;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+button {
+    padding: 5px;
+   background-color: white;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
+}
+
+form {
+    margin-top: 50px;
+}
+
+#poste_title {
+    width: 200px;
+}
+
+textarea {
+    width: 150px;
+}

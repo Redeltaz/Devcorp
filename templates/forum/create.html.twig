@@ -9,12 +9,15 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Créer un poste</h1>
+<section id="create">
+<div class="center">
+    <h1 class="title">Créer un poste</h1>
 
     {% if user is same as(NULL) %}
         <p><a href="{{ path('connexion') }}">Connectez vous</a> pour créer un poste</p>
     {% else %}
         {{ form(form) }}
     {% endif %}
-
+    </div>
+</section>
 {% endblock %}

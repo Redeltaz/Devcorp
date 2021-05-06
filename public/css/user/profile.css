@@ -11,7 +11,7 @@
     margin: 10px;
 }
 .ongletOne {
-    border: solid;
+    border: solid 2px;
     border-radius: 50px;
     padding: 10px;
     margin: 10px;
@@ -19,28 +19,26 @@
 }
 
 .ongletOne:hover {
-    background-color: green;
+background-image: linear-gradient(to right, #02AAB0 0%, #00CDAC  51%, #02AAB0  100%)
 }
-
 .ongletTwo {
-    border: solid;
+    border: solid 2px;
     border-radius: 50px;
     padding: 10px;
     margin: 10px;
     cursor: pointer;
 }
 .ongletTwo:hover {
-    background-color: blue;
-}
+    background-image: linear-gradient(to right, #EB3349 0%, #F45C43  51%, #EB3349  100%)}
 .ongletThree {
-    border: solid;
+    border: solid 2px;
     border-radius: 50px;
     padding: 10px;
     margin: 10px;
     cursor: pointer;
 }
 .ongletThree:hover {
-    background-color: brown;
+    background-image: linear-gradient(to right, #FF512F 0%, #F09819  51%, #FF512F  100%)
 }
 
 #infos {
